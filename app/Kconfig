@@ -47,4 +47,8 @@ menuconfig LED_SUBSYSTEM
 				default n
 		endmenu
 
+config APP_HEARTBEAT_PERIOD_MS
+	int "Application Heartbeat period (ms)"
+	default 500
+	range 100 2000
 source "Kconfig.zephyr"
