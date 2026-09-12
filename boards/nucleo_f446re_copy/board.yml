@@ -1,0 +1,6 @@
+board:
+  name: nucleo_f446re_copy
+  full_name: Nucleo F446RE COPY
+  vendor: st
+  socs:
+    - name: stm32f446xx
