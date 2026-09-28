@@ -2,4 +2,10 @@
     aliases {
 	app-led = &green_led_2;
     };
+    
+    custom_driver0: custom_driver {
+        compatible = "custom,driver";
+        gpio = <&green_led_2>;
+        status = "okay";
+    };
 };
