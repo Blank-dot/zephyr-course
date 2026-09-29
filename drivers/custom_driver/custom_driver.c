@@ -1,4 +1,3 @@
-#include "stm32f446xx.h"
 #include "zephyr/device.h"
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
@@ -15,7 +14,7 @@ struct custom_driver_config {
 };
 
 struct custom_driver_data {
-    bool state;
+    int state;
 };
 
 static int custom_get( const struct device* dev,
@@ -35,9 +34,9 @@ static int custom_fetch( const struct device* dev,
     return 0;
 }
 
-static DEVICE_API(sensor, custom_api) = {
-    .channel_get = custom_get,
-    .sample_fetch = custom_fetch,
+static DEVICE_API( sensor, custom_api ) = {
+        .channel_get = custom_get,
+        .sample_fetch = custom_fetch,
 };
 
 static int custom_driver_init ( const struct device *dev )
@@ -67,6 +66,15 @@ static int custom_driver_init ( const struct device *dev )
                         );
 
 DT_INST_FOREACH_STATUS_OKAY(DRIVER_INIT);
+
+int custom_driver_extra( const struct device* dev )
+{
+    const struct custom_driver_config* pConfig = dev->config;  
+    struct custom_driver_data* pData = dev->data;
+    pData->state = gpio_pin_get_dt( &pConfig->gpio );
+    return pData->state;
+}
+
 
 
 
