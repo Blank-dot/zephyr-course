@@ -1,4 +1,7 @@
 if ( CONFIG_CUSTOM_DRIVER )
     target_sources( app PRIVATE custom_driver.c )
+    if ( CONFIG_SHELL )
+        target_sources( app PRIVATE custom_driver_shell.c )
+    endif()
     target_include_directories( app PRIVATE . )
 endif()
